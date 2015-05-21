@@ -58,7 +58,7 @@
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="com.iheart.junit.localSanity.DemoTest" todir="${junit.output.dir}"/>
+            <test name="com.iheart.junit.localSanity.RunHeadful" todir="${junit.output.dir}"/>
             <classpath refid="LocalSanity.classpath"/>
         </junit>
     </target>

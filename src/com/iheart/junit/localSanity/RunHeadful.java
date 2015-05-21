@@ -22,7 +22,8 @@ public class RunHeadful {
 	 Z100HomePage homePage;
 		
 		
-		String browser = "firefox";
+		//String browser = "firefox";
+	    String browser = "chrome";
 		
 		static String userCity = "";
 		

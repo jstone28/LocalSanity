@@ -38,13 +38,13 @@ public class RunHeadless {
 
 		
 		
-		 System.setProperty("phantomjs.binary.path", "C:\\Users\\1111128\\workspace\\lib\\phantomjs-2.0.0-windows\\bin\\phantomjs.exe");
+		// System.setProperty("phantomjs.binary.path", "C:\\Users\\1111128\\workspace\\lib\\phantomjs-2.0.0-windows\\bin\\phantomjs.exe");
 		dCaps = new DesiredCapabilities();
 		dCaps.setJavascriptEnabled(true);
-		dCaps.setCapability("takesScreenshot", false);
+		dCaps.setCapability("takesScreenshot", true);
 		
 		driver = new PhantomJSDriver(dCaps);
-		//baseUrl = "http://www.z100.com/";
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		 Page.setDriver (driver);
@@ -71,6 +71,7 @@ public class RunHeadless {
 
 	@After
 	public void tearDown() throws Exception {
+		Page.takeScreenshot(driver, name.getMethodName());
 		driver.quit();
 		if (Page.getErrors().length() > 0)
 			 fail(Page.getErrors().toString());
