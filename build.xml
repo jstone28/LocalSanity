@@ -62,6 +62,16 @@
             <classpath refid="LocalSanity.classpath"/>
         </junit>
     </target>
+    
+    <target name="DemoTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.iheart.junit.localSanity.RunHeadful" todir="${junit.output.dir}"/>
+            <classpath refid="LocalSanity.classpath"/>
+        </junit>
+    </target>
+    
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
             <fileset dir="${junit.output.dir}">

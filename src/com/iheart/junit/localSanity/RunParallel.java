@@ -1,5 +1,4 @@
-package com.iheart.headless.localSanity;
-
+package com.iheart.junit.localSanity;
 
 import static org.junit.Assert.fail;
 
@@ -29,6 +28,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 
+
 import com.iheart.selenium.localSanity.ArticlePage;
 import com.iheart.selenium.localSanity.Header;
 import com.iheart.selenium.localSanity.Page;
@@ -39,24 +39,30 @@ import com.iheart.selenium.localSanity.Z100HomePage;
 
 @RunWith(Parameterized.class)
 
-public class RunHeadless {
+public class RunParallel {
 
 @Parameters
 public static Collection<Object[]> data() {
 
-	
+	/*
+return Arrays.asList(new Object[]
+		{"http://www.y100.com"} ,
+		{"http://www.933flz.com"},
+		{"http://www.Z100.com"}
+		);
+*/
 	
 	Collection<Object[]> params = new ArrayList<>(100);
 
 	//params.add(new Object[] {  "http://www.z100.com"});
-    //  params.add(new Object[] {  "http://www.y100.com"});
-     // params.add(new Object[] {  "http://www.radio1057.com"});
+      params.add(new Object[] {  "http://www.y100.com"});
+      params.add(new Object[] {  "http://www.radio1057.com"});
     //params.add(new Object[] {  "http://m.933flz.com"});
     // params.add(new Object[] {  "http://www.933flz.com"});
    //  params.add(new Object[] {  "http://www.Z100.com"});
     
-     params.add(new Object[] {  "http://mike.iheartmedia.com"});
-     params.add(new Object[] {  "http://m.mike.iheartmedia.com"});
+  //   params.add(new Object[] {  "http://mike.iheartmedia.com"});
+    // params.add(new Object[] {  "http://m.mike.iheartmedia.com"});
      
     return params;
 }
@@ -75,7 +81,7 @@ protected static DesiredCapabilities dCaps;
 	
 	
 	
-	public RunHeadless(String url) {
+	public RunParallel(String url) {
 		this.url = url;
 	
 	}
@@ -83,7 +89,7 @@ protected static DesiredCapabilities dCaps;
 	@Rule public TestName name = new TestName();
 	
 
-	///* run headless
+	/* run headless
 	@Before
 	public void setUp() throws Exception {
 
@@ -106,9 +112,24 @@ protected static DesiredCapabilities dCaps;
 	        
 	      Page.getErrors().delete(0, Page.getErrors().length());
 	}
+	*/
 	
 	
-	/*
+//headful run
+	@Before
+   public void init() {
+       driver = Utils.launchBrowser(url, browser);
+      	Page.setURL(url);
+       Page.setDriver (driver);
+       homePage = PageFactory.initElements(driver, Z100HomePage.class);
+       
+       articlePage = PageFactory.initElements(driver, ArticlePage.class);
+       header = PageFactory.initElements(driver, Header.class);
+       
+       Page.getErrors().delete(0, Page.getErrors().length());
+   }
+
+	
 	 @Test
 	 public void test_AL_498_nowPlayingWidegt() throws Exception
 	 {   
@@ -222,8 +243,8 @@ protected static DesiredCapabilities dCaps;
 	 	}  	
 	 	System.out.println(name.getMethodName() + " is Done.");
 	 }
- */
-	
+ 
+	/*
 	
 	@Test
 	 public void testBadLinks() throws Exception
@@ -237,7 +258,7 @@ protected static DesiredCapabilities dCaps;
 	 	}  	
 	 	System.out.println(name.getMethodName() + " is Done.");
 	 }
-    
+    */
   
 	 @After
 	    public void tearDown() throws Exception{
@@ -250,6 +271,14 @@ protected static DesiredCapabilities dCaps;
 	    private void handleException(Exception e)
 	    {   Page.getErrors().append("Exception is thrown.");
 	        e.printStackTrace();
+	        /*
+	        try{
+	    	   Page.takeScreenshot(driver, name.getMethodName());
+            }catch(Exception eX)
+            {
+            	
+            }
+            */
 	    }
 	    
 	   
