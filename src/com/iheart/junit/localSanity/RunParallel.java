@@ -76,8 +76,8 @@ protected static DesiredCapabilities dCaps;
 	 ArticlePage articlePage;
 	 Header header;	
 		
-	//String browser = "firefox";
-   String browser = "chrome";
+	String browser = "firefox";
+   //String browser = "chrome";
 	
 	
 	

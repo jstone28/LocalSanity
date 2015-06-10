@@ -311,19 +311,47 @@ public class ArticlePage extends Page {
 			
 			try{
 				//first, check it in iframe 3
-				if (Page.getURL().contains("z100.com"))
-				    adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("a")).getAttribute("href");
-				else
-					adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("iframe")).getAttribute("name");
+				adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("a")).getAttribute("href");
 			}catch(Exception e)
 			{
-				driver.switchTo().defaultContent();
-				if (Page.getURL().contains("z100.com"))
-				    adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("a")).getAttribute("href");
-				else
+				
+			}	
+				
+			if (adURL.length() < 1)
+			{	
+				try{
+					//first, check it in iframe 3
 					adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("iframe")).getAttribute("name");
+				}catch(Exception e)
+				{
+					
+				}	
+			
 			}
 			
+			if (adURL.length() < 1)
+			{
+				driver.switchTo().defaultContent();
+				try{
+				  adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("a")).getAttribute("href");
+				}catch(Exception e)
+				{
+						
+				}
+				
+				if (adURL.length() < 1)
+				{
+					driver.switchTo().defaultContent();
+					try{
+						adURL = driver.findElement(By.id("bottomleaderboard")).findElement(By.tagName("iframe")).getAttribute("name");
+					}catch(Exception e)
+					{
+							
+					}
+				}
+			}
+			
+
 			System.out.println("adURL: " + adURL);
     		
 			if (adURL.length() < 4)
